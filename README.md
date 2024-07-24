@@ -36,6 +36,15 @@ Use this folder to store data.
 
 All of the data processing scripts are here. Add all of the preferred processing steps to the subsections listed in the main file.
 
+#### Cleaning
+- Put all the code used for cleaning the data in this file. This is not called in the training pipeline so it can be empty and is a placeholder to put any tranformative code.
+
+#### Exploration
+- This file can be used for the EDA process. It isn't a requirement as many people prefer using Jupyter notebooks but it is available.
+
+#### Preprocessing
+- This file is called in the training pipeline and must NOT be left empty. Add all the transformation functions to this file to prepare data for training.
+
 ## Model
 
 Here we build our model. In this folder you should put any scripts, configs, etc for constructing your model. Additionally include the model training and validation scripts.
