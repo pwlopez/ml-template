@@ -1,0 +1,2 @@
+# All of these libraries will be installed inside the container image used
+# used to train the model on AWS Sagemaker
