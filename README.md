@@ -37,19 +37,44 @@ Use this folder to store data.
 All of the data processing scripts are here. Add all of the preferred processing steps to the subsections listed in the main file.
 
 - #### Contents:
-    ##### Cleaning
+    ##### cleaning.py
     - Put all the code used for cleaning the data in this file. This is not called in the training pipeline so it can be empty and is a placeholder to put any tranformative code.
 
-#### Exploration
-- This file can be used for the EDA process. It isn't a requirement as many people prefer using Jupyter notebooks but it is available.
+    ##### exploration.py
+    - This file can be used for the EDA process. It isn't a requirement as many people prefer using Jupyter notebooks but it is available.
 
-#### Preprocessing
-- This file is called in the training pipeline and must NOT be left empty. Add all the transformation functions to this file to prepare data for training.
+    ##### preprocessing.py
+    - This file is called in the training pipeline and must NOT be left empty. Add all the transformation functions to this file to prepare data for training.
 
 ### Model
 
 Here we build our model. In this folder you should put any scripts, configs, etc for constructing your model. Additionally include the model training and validation scripts.
 
+- #### Contents:
+    ##### train.py
+    - This file is used to initiate model training. This is called form the training pipeline and therefore it's important to put all the required code in the specified locations.
+
+    ###### AWS:
+    * In order to run training jobs on AWS Sagemaker, we need:
+        - container image
+            * training script, which holds that actual model training steps and will vary depending on model used.
+        - training script
+            * this is to initiate the training job via the Sagemaker SDK and boto3 SDK.
+        - shell script
+            * this script accepts AWS credentials as input to build and push the container image to AWS ECR
+        - dockerfile
+            * blueprint for buidling the container image
+    
+    * Currently, only AWS is supported for training jobs. Other options include Github runners (paid) and self hosted runners on preferred hyperscaler
+
+    ##### validate.py
+    - Validate the model with held out data.
+
+    ##### app.py
+    - 
+
+    ##### dockerfile
+    - 
 
 #### Train
 - This script is called from the training pipeline. It will initiate model training in the specified destination.
