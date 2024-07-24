@@ -51,10 +51,8 @@ All of the data processing scripts are here. Add all of the preferred processing
 Here we build our model. In this folder you should put any scripts, configs, etc for constructing your model. Additionally include the model training and validation scripts.
 
 - #### Contents:
-    ##### train.py
-    - This file is used to initiate model training. This is called form the training pipeline and therefore it's important to put all the required code in the specified locations.
 
-    ###### AWS:
+    ##### Deployment via AWS:
     * In order to run training jobs on AWS Sagemaker, we need:
         - container image
             * training script, which holds that actual model training steps and will vary depending on model used.
@@ -65,16 +63,22 @@ Here we build our model. In this folder you should put any scripts, configs, etc
         - dockerfile
             * blueprint for buidling the container image
     
-    * Currently, only AWS is supported for training jobs. Other options include Github runners (paid) and self hosted runners on preferred hyperscaler
+    *NOTE: Currently, only AWS is supported for training jobs. Other options include Github runners (paid) and self hosted runners on preferred hyperscaler*
+
+    ##### train.py
+    - This file holds the actual model training as if you were training a model locally. This is the main script run for the training job on AWS.
 
     ##### validate.py
     - Validate the model with held out data.
 
-    ##### app.py
-    - 
+    ##### runner.py
+    - This script intiates the training job on AWS.
 
     ##### dockerfile
-    - 
+    - Blueprint to build the training container image onto.
+
+    ##### requirements.txt
+    - These are the imports used for training the preferred model.
 
 #### Train
 - This script is called from the training pipeline. It will initiate model training in the specified destination.
