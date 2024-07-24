@@ -38,7 +38,7 @@ All of the data processing scripts are here. Add all of the preferred processing
 
 - #### Contents:
     ##### Cleaning
-        - Put all the code used for cleaning the data in this file. This is not called in the training pipeline so it can be empty and is a placeholder to put any tranformative code.
+    - Put all the code used for cleaning the data in this file. This is not called in the training pipeline so it can be empty and is a placeholder to put any tranformative code.
 
 #### Exploration
 - This file can be used for the EDA process. It isn't a requirement as many people prefer using Jupyter notebooks but it is available.
