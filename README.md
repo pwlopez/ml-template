@@ -63,7 +63,7 @@ Here we build our model. In this folder you should put any scripts, configs, etc
         - dockerfile
             * blueprint for buidling the container image
     
-    *NOTE: Currently, only AWS is supported for training jobs. Other options include Github runners (paid) and self hosted runners on preferred hyperscaler*
+    *NOTE: Currently, only AWS is supported for training jobs. Other options include Github runners (paid) and self hosted runners on preferred hyperscaler. As a result most of these scripts will be tailored to AWS*
 
     ##### train.py
     - This file holds the actual model training as if you were training a model locally. This is the main script run for the training job on AWS.

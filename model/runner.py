@@ -1,0 +1,2 @@
+# Use boto3 to initiate the training job here. This script is called locally (or whatever machine you're working on). 
+# Objects created from the training job will be stored in S3 as a tar file. Here we download the files from S3
