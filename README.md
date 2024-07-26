@@ -33,6 +33,7 @@ This is a template for ML projects including pipeline creation, CI/CD, and deplo
 Use this folder to store data.
 
 ### Data Processing
+---
 
 All of the data processing scripts are here. Add all of the preferred processing steps to the subsections listed in the main file.
 
@@ -63,7 +64,9 @@ Here we build our model. In this folder you should put any scripts, configs, etc
         - dockerfile
             * blueprint for buidling the container image
     
-    *NOTE: Currently, only AWS is supported for training jobs. Other options include Github runners (paid) and self hosted runners on preferred hyperscaler. As a result most of these scripts will be tailored to AWS*
+    *NOTE: Currently, only AWS is supported for training jobs. Other options include Github runners (paid) and self hosted runners on preferred hyperscaler (also paid). 
+    
+    NOTE: These scripts are tailored to AWS*
 
     ##### train.py
     - This file holds the actual model training as if you were training a model locally. This is the main script run for the training job on AWS.
@@ -80,13 +83,10 @@ Here we build our model. In this folder you should put any scripts, configs, etc
     ##### requirements.txt
     - These are the imports used for training the preferred model.
 
-#### Train
-- This script is called from the training pipeline. It will initiate model training in the specified destination.
-
 ### Serve
 
 This folder contains the core API used to serve the model. This API is model agnostic (mostly) and is able to handle a variety of model types.
 
 ### Test
 
-Here are all the testing scripts. The scripts present in this file will be be called during the CI/CD process.
+Here are all the testing scripts. The scripts present in this file will be called during the CI/CD process.
