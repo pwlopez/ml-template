@@ -25,12 +25,15 @@ This is a template for ML projects including pipeline creation, CI/CD, and deplo
     - AWS (start here)
     - AZURE
     - etc
-
+\
+&nbsp;
 
 ---
 ### Data
 
 Use this folder to store data.
+\
+&nbsp;
 
 ---
 ### Data Processing
@@ -46,6 +49,8 @@ All of the data processing scripts are here. Add all of the preferred processing
 
     ##### preprocessing.py
     - This file is called in the training pipeline and must NOT be left empty. Add all the transformation functions to this file to prepare data for training.
+\
+&nbsp;
 
 ---
 ### Model
@@ -82,14 +87,37 @@ Here we build our model. In this folder you should put any scripts, configs, etc
     - Blueprint to build the training container image onto.
 
     ##### requirements.txt
-    - These are the imports used for training the preferred model.
-
+    - These are the imports used for training the preferred model. These libraries are installed in the docker container when it is built.
+\
+&nbsp;
 
 ---
 ### Serve
 This folder contains the core API used to serve the model. This API is model agnostic (mostly) and is able to handle a variety of model types.
+\
+&nbsp;
 
 ---
 ### Test
-
 Here are all the testing scripts. The scripts present in this file will be called during the CI/CD process.
+\
+&nbsp;
+
+## Steps:
+The steps involved with model building, testing, and deployment are define below.
+
+1. Data handling
+
+    The first step in any ML project is handling your data. There are 3 scripts made available to perform the intial cleaning of the data, along with exploratory analysis and preprocessing. Only of the provided scripts is required for the workflow, that is preprocessing.py. This is the first script called when the pipeline initiates and is responsible for transforming the supplied data into the correct features and format for model training.
+\
+&nbsp;
+
+2. Model building
+
+    This is the center piece of any ML project, the actual model development. Here the "model" folder is used to hold all of the required base scripts and utilities for setting up the model. The main focus of this folder is runner.py, the script called by the training pipeline to initiate the model training. When this happens, a training job will be created in AWS with the supplied files. train.py is the file AWS Sagemaker calls to initiate model training and this is where all of the required code will go. Here the model architecture is defined and all necessary steps around it such as train-test-split, are performed - all happening inside a docker container provided to AWS. The output from the training job is a tar file stored in S3. The model object is then downloaded from S3 and validated against a small subset of provided held-out data.
+\
+&nbsp;
+
+3. Serving
+
+    The final core step in the process is deploying the model to an endpoint. 
