@@ -11,6 +11,8 @@ This is a template for ML projects including pipeline creation, CI/CD, and deplo
     - validation
 - build github actions workflow for:
     - training
+        - store AWS credentials as github secrets
+        - pass AWS credentials as environment variables to script
     - serving
 - create Flask app for serving
     - include options for API Key

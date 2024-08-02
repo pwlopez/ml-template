@@ -8,11 +8,8 @@ from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.utils import to_categorical
 
-# smdebug modification: Import smdebug support for Tensorflow
-import smdebug.tensorflow as smd
 
-
-def train(batch_size, epoch, model, hook):
+def train(batch_size, epoch, model):
 
     # Train-test split
     (X_train, y_train), (X_valid, y_valid) = cifar10.load_data()
@@ -29,11 +26,11 @@ def train(batch_size, epoch, model, hook):
     X_train /= 128.
     X_valid /= 128.
 
-    # register hook to save the following scalar values
-    hook.save_scalar("epoch", epoch)
-    hook.save_scalar("batch_size", batch_size)
-    hook.save_scalar("train_steps_per_epoch", len(X_train)/batch_size)
-    hook.save_scalar("valid_steps_per_epoch", len(X_valid)/batch_size)
+    # TO DO: Modify this to use a logger rather than smdebug hooks
+    #hook.save_scalar("epoch", epoch)
+    #hook.save_scalar("batch_size", batch_size)
+    #hook.save_scalar("train_steps_per_epoch", len(X_train)/batch_size)
+    #hook.save_scalar("valid_steps_per_epoch", len(X_valid)/batch_size)
 
     # Fit model
     model.fit(X_train, Y_train,
@@ -69,42 +66,13 @@ def main():
 
         model = ResNet50(weights=None, input_shape=(32,32,3), classes=10)
 
-        """
-        The following is OPTIONAL, hooks are not absolutely necessary and only apply to "Deep Learning Containers"
-
-        Hooks are for saving tensors during training
-
-        This script is a ResNet training script which uses Tensorflow's Keras interface, and provides an example 
-        of how to use SageMaker Debugger when you use your own custom container in SageMaker or your own script 
-        outside SageMaker. It has been orchestrated with SageMaker Debugger hooks to allow saving tensors 
-        during training. These hooks have been instrumented to read from a JSON configuration that SageMaker puts 
-        in the training container. Configuration provided to the SageMaker python SDK when creating a job will be 
-        passed on to the hook. This allows you to use the same script with different configurations across different runs.
-
-        If you use an official SageMaker Framework container (i.e. AWS Deep Learning Container), you do not have to 
-        orchestrate your script as below. Hooks are automatically added in those environments. 
-        This experience is called a "zero script change". For more information, 
-        see https://github.com/awslabs/sagemaker-debugger/blob/master/docs/sagemaker.md#zero-script-change. An example of 
-        the same is provided at https://github.com/awslabs/amazon-sagemaker-examples/sagemaker-debugger/tensorflow2/tensorflow2_zero_code_change.
-        """
-        # smdebug modification:
-        # Create hook from the configuration provided through sagemaker python sdk.
-        # This configuration is provided in the form of a JSON file.
-        # Default JSON configuration file:
-        # {
-        #     "LocalPath": <path on device where tensors will be saved>
-        # }"
-        # Alternatively, you could pass custom debugger configuration (using DebuggerHookConfig)
-        # through SageMaker Estimator. For more information, https://github.com/aws/sagemaker-python-sdk/blob/master/doc/amazon_sagemaker_debugger.rst
-        hook = smd.KerasHook.create_from_json_file()
-
         opt = tf.keras.optimizers.Adam(learning_rate=args.lr)
         model.compile(loss='categorical_crossentropy',
                       optimizer=opt,
                       metrics=['accuracy'])
 
     # start the training.
-    train(args.batch_size, args.epoch, model, hook)
+    train(args.batch_size, args.epoch, model)
 
 if __name__ == "__main__":
     main()

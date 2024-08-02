@@ -1,5 +1,6 @@
 # Neccessary imports
 boto3
+sagemaker
 
 # Example imports for the template
 tensorflow
