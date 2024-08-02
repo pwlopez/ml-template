@@ -1,0 +1,6 @@
+# Neccessary imports
+boto3
+
+# Example imports for the template
+tensorflow
+smdebug
