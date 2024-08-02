@@ -1,8 +1,9 @@
 name: Training Workload
 on: 
   pull_request:
-    types: [opened]
-    branches: ["main"]
+    types: [opened, reopened]
+    branches: 
+      - main
 jobs:
   train_model:
     runs-on: ubuntu-latest
