@@ -1,6 +1,7 @@
 name: Training Workload
 on: 
   pull_request:
+    types: [opened]
     branches: ["main"]
 jobs:
   train_model:
