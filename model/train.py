@@ -38,8 +38,7 @@ def train(batch_size, epoch, model):
               epochs=epoch,
               validation_data=(X_valid, Y_valid),
               shuffle=False,
-              # smdebug modification: Pass the hook as a Keras callback
-              callbacks=[hook])
+              )
     
     # Save model
     model.save("/opt/ml/model/resnet50.keras")
