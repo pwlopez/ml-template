@@ -31,6 +31,47 @@ This is a template for ML projects including pipeline creation, CI/CD, and deplo
 &nbsp;
 
 ---
+### Getting Started
+
+I highly recommend using some sort of Python version management such as Pyenv. Using Pyenv allows the user to generate an environment tied to a specific version of Python. At the very least, start with a virtual environment.
+
+Using Pyenv:
+```
+# Create virtual environment
+pyenv virtualenv 3.10 ml-template
+
+# Activate virtual environment
+pyenv activate ml-template
+```
+```
+pyenv           - use Pyenv to create the virtual environemnt
+virtualenv      - actual command to create the environment
+3.10            - Python version to use, any can be specified
+ml-template     - name of the virtual environment
+activate        - activate the virtual environment
+```
+
+Using virtualenv:
+```
+# Create virtual environment
+python -m venv ml-template
+
+# Activate virtual environment
+source ml-template/bin/activate
+```
+```
+python          - use python
+-m              - execute python code from the command line via modulename (more or less)
+venv            - command to create virtual environment
+ml-template     - name of the virtual environment
+```
+
+Both of the above are highly recommended and great options but I personally prefer Pyenv.
+
+**NOTE: This is for bash/zsh**
+\
+&nbsp;
+
 ### Data
 
 Use this folder to store data.
