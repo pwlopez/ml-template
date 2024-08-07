@@ -5,9 +5,9 @@ import os
 from sagemaker.estimator import Estimator
 
 # These variables are passed from Github Secrets to this script in the Github Actions workflow
-ROLE = os.env["AWS-ROLE"]
-TRAINING_URI = os.env["AWS-TRAINING-URI"]
-TRAINING_INSTANCE = os.env["AWS-INSTANCE"]
+ROLE = os.env["AWS_ROLE"]
+TRAINING_URI = os.env["ECR_REGISTRY"]
+TRAINING_INSTANCE = os.env["TRAINING_INSTANCE"]
 
 estimator = Estimator(
     image_name=TRAINING_URI,
