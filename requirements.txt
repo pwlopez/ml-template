@@ -1,6 +1,7 @@
 # Neccessary imports
 boto3
 sagemaker
+numpy
 
 # Example imports for the template
 tensorflow

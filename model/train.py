@@ -3,19 +3,16 @@ import random
 
 # Third Party
 import numpy as np
-import tensorflow.compat.v2 as tf
-from tensorflow.keras.applications.resnet50 import ResNet50
-from tensorflow.keras.datasets import cifar10
-from tensorflow.keras.utils import to_categorical
+import tensorflow as tf
 
 
 def train(batch_size, epoch, model):
 
     # Train-test split
-    (X_train, y_train), (X_valid, y_valid) = cifar10.load_data()
+    (X_train, y_train), (X_valid, y_valid) = tf.keras.datasets.cifar10.load_data()
 
-    Y_train = to_categorical(y_train, 10)
-    Y_valid = to_categorical(y_valid, 10)
+    Y_train = tf.keras.utils.to_categorical(y_train, 10)
+    Y_valid = tf.keras.utils.to_categorical(y_valid, 10)
 
     X_train = X_train.astype('float32')
     X_valid = X_valid.astype('float32')
@@ -63,7 +60,7 @@ def main():
     mirrored_strategy = tf.distribute.MirroredStrategy()
     with mirrored_strategy.scope():
 
-        model = ResNet50(weights=None, input_shape=(32,32,3), classes=10)
+        model = tf.keras.applications.ResNet50(weights=None, input_shape=(32,32,3), classes=10)
 
         opt = tf.keras.optimizers.Adam(learning_rate=args.lr)
         model.compile(loss='categorical_crossentropy',
